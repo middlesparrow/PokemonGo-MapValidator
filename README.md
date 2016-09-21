@@ -36,9 +36,9 @@ activate the option for less secure applications.
  - Gmail account
 
 # How to use
- -h,--help                            show help  
- -l,--login <xxx@gmail.com>           email login  
- -p,--password <*****>                email password  
- -d,--email-dest <email>              email destination. Default: login email  
- -pl,--page-loading <value ms>        wait for the page to load: Default: 10000 miliseconds  
- -lp,--loading-pokemongo <value ms>   wait for pokemongo to load. Default: 10000 miliseconds
+ -h,--help | show help  
+ -l,--login <xxx@gmail.com> | email login  
+ -p,--password <*****> | email password  
+ -d,--email-dest <email> | email destination. Default: login email  
+ -pl,--page-loading <value ms> | wait for the page to load: Default: 10000 miliseconds  
+ -lp,--loading-pokemongo <value ms> | wait for pokemongo to load. Default: 10000 miliseconds
