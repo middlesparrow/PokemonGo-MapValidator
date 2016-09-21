@@ -6,15 +6,15 @@ How it works:
 
 Takes a screenshot of the empty map. All Options are disabled using Selenium.
 
-![]({{site.baseurl}}/https://github.com/middlesparrow/PokemonGo-MapValidator/blob/master/semPokemongos.png)
+![without Pokémon](https://github.com/middlesparrow/PokemonGo-MapValidator/blob/master/semPokemongos.png)
 
 Takes a screenshot of the map with pokemons. Only Options->Pokémon is enabled using Selenium.
 
-![]({{site.baseurl}}/https://github.com/middlesparrow/PokemonGo-MapValidator/blob/master/comPokemongos.png)
+![with Pokémon]({{site.baseurl}}/https://github.com/middlesparrow/PokemonGo-MapValidator/blob/master/comPokemongos.png)
 
 Generates a picture with the differences.
 
-![]({{site.baseurl}}/https://github.com/middlesparrow/PokemonGo-MapValidator/blob/master/vila-real.jpg)
+![result]({{site.baseurl}}/https://github.com/middlesparrow/PokemonGo-MapValidator/blob/master/vila-real.jpg)
 
 
 What is does:
