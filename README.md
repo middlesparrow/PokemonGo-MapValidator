@@ -10,11 +10,11 @@ Takes a screenshot of the empty map. All Options are disabled using Selenium.
 
 Takes a screenshot of the map with pokemons. Only Options->Pokémon is enabled using Selenium.
 
-![with Pokémon]({{site.baseurl}}/https://github.com/middlesparrow/PokemonGo-MapValidator/blob/master/comPokemongos.png)
+![with Pokémon](https://github.com/middlesparrow/PokemonGo-MapValidator/blob/master/comPokemongos.png)
 
 Generates a picture with the differences.
 
-![result]({{site.baseurl}}/https://github.com/middlesparrow/PokemonGo-MapValidator/blob/master/vila-real.jpg)
+![result](https://github.com/middlesparrow/PokemonGo-MapValidator/blob/master/vila-real.jpg)
 
 
 What is does:
