@@ -3,7 +3,7 @@
 Compares a picture of the empty location, with a picture of the same location with the Pokémon.
 If the picture with Pokémon is empty, it means that the server has stopped working or it is very slow.
 
-How it works:
+# How it works:
 
 1 - Takes a screenshot of the empty map. All Options are disabled using Selenium.
 http://pokemap.oinkandstuff.com:5011/
@@ -33,11 +33,12 @@ activate the option for less secure applications.
 # Installation
  - Java 8
  - Chrome Browser (the project uses chromedriver)
+ - Gmail account
 
 # How to use
- -h,--help                            show help
- -l,--login <xxx@gmail.com>           email login
- -p,--password <*****>                email password
- -d,--email-dest <email>              email destination. Default: login email
- -pl,--page-loading <value ms>        wait for the page to load: Default: 10000 miliseconds
+ -h,--help                            show help  
+ -l,--login <xxx@gmail.com>           email login  
+ -p,--password <*****>                email password  
+ -d,--email-dest <email>              email destination. Default: login email  
+ -pl,--page-loading <value ms>        wait for the page to load: Default: 10000 miliseconds  
  -lp,--loading-pokemongo <value ms>   wait for pokemongo to load. Default: 10000 miliseconds
