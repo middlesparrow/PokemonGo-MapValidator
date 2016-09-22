@@ -36,7 +36,7 @@ activate the option for less secure applications.
 
 If the gmail account you want to use has the 2-step verification, refer to this link https://support.google.com/accounts/answer/185833 and https://support.google.com/a/answer/6260879
 
-# Installation
+# Installation prerequisites
  - Java 8
  - Chrome Browser (the project uses chromedriver)
  - Gmail account
@@ -54,11 +54,11 @@ If the gmail account you want to use has the 2-step verification, refer to this 
  chromedriver.exe - v2.24. Replace if there's a more recent version.
  
  chromeprofile.zip - a clean profile for chrome browser. Probably at some point in time might need to be recreated. Use Selenium to do it.
- 
- # Libs
-  - javax.mail
-  - jxl-2.6.12
-  - commons-cli-1.3.1
-  - zip4j_1.3.2
-  - image-comparison-1.0
-  - selenium-server-standalone-2.53.1
+
+# Libs
+ - javax.mail
+ - jxl-2.6.12
+ - commons-cli-1.3.1
+ - zip4j_1.3.2
+ - image-comparison-1.0
+ - selenium-server-standalone-2.53.1
