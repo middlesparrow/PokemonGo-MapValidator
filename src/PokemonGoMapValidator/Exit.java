@@ -20,12 +20,13 @@ public class Exit {
     
     public void exit(WebDriver driver) throws InterruptedException
     {
+
         //parece que em algumas situações, o melhor é aguardar uns segundos antes de sair
         Thread.sleep(5000);
         
         //para tirar o chromedriver da memória, tem de se fazer quit
         driver.quit();
-  
+
     }
     
 }

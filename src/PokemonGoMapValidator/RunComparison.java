@@ -33,7 +33,7 @@ public class RunComparison {
 
     }
 
-    public void comparison(String currentDirectory, WebDriver driver) throws IOException, InterruptedException {
+    public void comparison(String currentDirectory, WebDriver driver, String mapFile) throws IOException, InterruptedException {
 
         List<String> links = new ArrayList<>();
         List<WebElement> extra = new ArrayList<>();
@@ -60,41 +60,25 @@ public class RunComparison {
         ImageComparison imageComparison = new ImageComparison(50, 50, 0);
 
         LoadMap carregarDados = new LoadMap();
-        carregarDados.LoadMap(links);
+        carregarDados.LoadMap(currentDirectory, links, mapFile);
 
         if (links.size() > 0) {
-            for (int i = 0; i < links.size(); i = i + 3) {
+            for (int i = 0; i < links.size(); i = i+2) {
                 
                 if (links.get(i).length() > 0)
                 {
 
                 //validate directory
-                File f = new File(currentDirectory + "/prints/" + links.get(i + 2) + "/");
+                File f = new File(currentDirectory + "/prints/" + links.get(i + 1) + "/");
                 if (!f.isDirectory()) {
-                    new File(currentDirectory + "/prints/" + links.get(i + 2) + "/").mkdir();
+                    new File(currentDirectory + "/prints/" + links.get(i + 1) + "/").mkdir();
                 }
                 if (f.isDirectory()) {
 
                     //validate url
-                    //porto invalido
-                    try{
-                    int porto = Integer.parseInt(links.get(i + 1));
-                    }
-                    catch(NumberFormatException ex)
-                    {
-                       links.set(i + 1, "");
-                    }
                     
-                    //porto existe
-                    if (links.get(i + 1).length()>0)
-                            {
-                    baseUrl = links.get(i) + ":" + links.get(i + 1);
-                            }
-                    else
-                    {
-                        baseUrl = links.get(i);
-                    }
-                    
+                    baseUrl = links.get(i);
+                                       
                     responseCode = openURL.openURL(driver, baseUrl);
                     if ("200".equals(responseCode)) {
 
@@ -129,7 +113,7 @@ public class RunComparison {
                         
                         //empty screenshot
                         File baseFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                        FileUtils.copyFile(baseFile, new File(semPokemongos + links.get(i + 2) + "/" + localPrtscFile));
+                        FileUtils.copyFile(baseFile, new File(semPokemongos + links.get(i + 1) + "/" + localPrtscFile));
 
                         //open the options
                         formElement = driver.findElement(By.xpath("//span[text()='Options']"));
@@ -153,38 +137,38 @@ public class RunComparison {
                         //take screenshot
                         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
                         // Now you can do whatever you need to do with it, for example copy somewhere
-                        FileUtils.copyFile(scrFile, new File(comPokemongos + links.get(i + 2) + "/" + urlPrtscFile));
+                        FileUtils.copyFile(scrFile, new File(comPokemongos + links.get(i + 1) + "/" + urlPrtscFile));
 
-                        String imgOriginal = semPokemongos + links.get(i + 2) + "/" + localPrtscFile;
-                        String imgToCompareWithOriginal = comPokemongos + links.get(i + 2) + "/" + urlPrtscFile;
-                        String imgOutputDifferences = diferencasPath + links.get(i + 2) + "/" + diferencasFile + links.get(i + 2) + ".jpg";
+                        String imgOriginal = semPokemongos + links.get(i + 1) + "/" + localPrtscFile;
+                        String imgToCompareWithOriginal = comPokemongos + links.get(i + 1) + "/" + urlPrtscFile;
+                        String imgOutputDifferences = diferencasPath + links.get(i + 1) + "/" + diferencasFile + links.get(i + 1) + ".jpg";
 
                         if (imageComparison.fuzzyEqual(imgOriginal, imgToCompareWithOriginal, imgOutputDifferences)) {
-                            System.out.println("Images are equal and that is bad!" + links.get(i + 2));
-                            subjectList.add("Location without pokemongos: " + links.get(i + 2));
+                            System.out.println("Images are equal and that is bad!" + links.get(i + 1));
+                            subjectList.add("Location without pokemongos: " + links.get(i + 1));
 
                             //to send by email the generated image, activate these two lines below
-                            //attachmentList.add(diferencasPath + links.get(i + 2) + "/");
-                            //attachmentList.add(diferencasFile + links.get(i + 2) + ".jpg");
+                            //attachmentList.add(diferencasPath + links.get(i + 1) + "/");
+                            //attachmentList.add(diferencasFile + links.get(i + 1) + ".jpg");
                         } else {
-                            //System.out.println("Images are not equal and that is good!" + links.get(i + 2));
+                            //System.out.println("Images are not equal and that is good!" + links.get(i + 1));
                             count++;
                         }
                         }
                         else
                         {
-                            System.out.println("Timeout finding an element: " + links.get(i + 2));
-                            subjectList.add("Timeout finding an element: " + links.get(i + 2));
+                            System.out.println("Timeout finding an element: " + links.get(i + 1));
+                            subjectList.add("Timeout finding an element: " + links.get(i + 1));
                         }
 
                     } else {
-                        System.out.println("Erro a abrir a localização: " + responseCode + " - " + links.get(i + 2));
-                        subjectList.add("Error opening the location: " + responseCode + " - " + links.get(i + 2));
+                        System.out.println("Erro a abrir a localização: " + responseCode + " - " + links.get(i + 1));
+                        subjectList.add("Error opening the location: " + responseCode + " - " + links.get(i + 1));
 
                     }
                 } else {
-                    System.out.println("Directoria inexistente: " + links.get(i + 2));
-                    subjectList.add("Error opening folder: " + links.get(i + 2));
+                    System.out.println("Directoria inexistente: " + links.get(i + 1));
+                    subjectList.add("Error opening folder: " + links.get(i + 1));
                 }
                 
                 }
