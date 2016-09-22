@@ -48,3 +48,17 @@ If the gmail account you want to use has the 2-step verification, refer to this 
  -d,--email-dest <email> | email destination. Default: login email  
  -pl,--page-loading <value ms> | wait for the page to load: Default: 10000 miliseconds  
  -lp,--loading-pokemongo <value ms> | wait for pokemongo to load. Default: 10000 miliseconds
+ 
+ mapvalidator.xls - place the maps in this file. Make a copy of mapvalidator-template.xls if necessary.
+ 
+ chromedriver.exe - v2.24. Replace if there's a more recent version.
+ 
+ chromeprofile.zip - a clean profile for chrome browser. Probably at some point in time might need to be recreated. Use Selenium to do it.
+ 
+ # Libs
+  - javax.mail
+  - jxl-2.6.12
+  - commons-cli-1.3.1
+  - zip4j_1.3.2
+  - image-comparison-1.0
+  - selenium-server-standalone-2.53.1
