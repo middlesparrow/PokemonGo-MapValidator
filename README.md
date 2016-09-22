@@ -3,6 +3,10 @@
 Compares a picture of the empty location, with a picture of the same location with the Pokémon.
 If the picture with Pokémon is empty, it means that the server has stopped working or it is very slow.
 
+I used for testing the maps available at http://www.oinkandstuff.com  
+They are running on a previous, more light, version of the project https://github.com/PokemonGoMap/PokemonGo-Map
+
+
 # How it works:
 
 1 - Takes a screenshot of the empty map. All Options are disabled using Selenium.
