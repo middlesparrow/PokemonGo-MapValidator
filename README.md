@@ -30,6 +30,8 @@ It is recommended to create a gmail account just for this project, and in this l
 https://www.google.com/settings/security/lesssecureapps
 activate the option for less secure applications.
 
+If the gmail account you want to use has the 2-step verification, refer to this link https://support.google.com/accounts/answer/185833
+
 # Installation
  - Java 8
  - Chrome Browser (the project uses chromedriver)
