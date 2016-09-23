@@ -56,7 +56,7 @@ public class OpenURL {
 
 
         } catch (Exception ex) {
-            return ex.toString();
+            return ex.getMessage();
         }
         return responseCode;
     }

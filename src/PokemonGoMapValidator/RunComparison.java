@@ -7,7 +7,6 @@ package PokemonGoMapValidator;
 
 import static PokemonGoMapValidator.Main.LOADINGPOKEMONGOS;
 import static PokemonGoMapValidator.Main.MAPDIMENSION;
-import static PokemonGoMapValidator.Main.EMAIL_DEST;
 import static PokemonGoMapValidator.Main.LOGIN;
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +49,7 @@ public class RunComparison {
         String diferencasFile = "";
         String baseUrl = "";
         int count = 0;
+        int countTot = 0;
         int optionsAnimation = 1000;
         String responseCode = "";
 
@@ -153,17 +153,20 @@ public class RunComparison {
                         } else {
                             //System.out.println("Images are not equal and that is good!" + links.get(i + 1));
                             count++;
+                            countTot++;
                         }
                         }
                         else
                         {
                             System.out.println("Timeout finding an element: " + links.get(i + 1));
                             subjectList.add("Timeout finding an element: " + links.get(i + 1));
+                            countTot++;
                         }
 
                     } else {
                         System.out.println("Erro a abrir a localização: " + responseCode + " - " + links.get(i + 1));
                         subjectList.add("Error opening the location: " + responseCode + " - " + links.get(i + 1));
+                        countTot++;
 
                     }
                 } else {
@@ -181,7 +184,7 @@ public class RunComparison {
             }
 
             subjectList.add("Maps without any errors: " + count);
-            subjectList.add("Total maps tested : " + count);
+            subjectList.add("Total maps tested : " + countTot);
 
         } else {
             System.out.println("Não carregou os url dos mapas");
