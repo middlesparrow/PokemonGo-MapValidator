@@ -61,4 +61,10 @@ If the gmail account you want to use has the 2-step verification, refer to this 
  - commons-cli-1.3.1
  - zip4j_1.3.2
  - image-comparison-1.0
+ - log4j-1.2.17
  - selenium-server-standalone-2.53.1
+
+# ToDo
+ - Daily log;
+ - Argument for changing image size (currently 800*800)
+
