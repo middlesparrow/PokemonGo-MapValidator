@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.List;
 import jxl.*;
 import jxl.read.biff.BiffException;
-import jxl.write.*;
 
 /**
  *
@@ -33,20 +32,23 @@ public class LoadMap {
             Sheet sheet1 = workbook1.getSheet(0); //save the first sheet in sheet1
                 int size = sheet1.getRows();
             // OBTAINING THE DATA YOU NEED
+            if (size>0)
+            {
             for (int i = 1; i < size; i++) {
                 Cell s = sheet1.getCell(0, i); // getCell(column,row) //obtains site
                 Cell n = sheet1.getCell(1, i); // obtains name
                 if (s.getContents() != null)
-                    if (s.getContents() != "")
+                    if (!"".equals(s.getContents()))
                 {
                 links.add(s.getContents());
                 links.add(n.getContents());
                 }
                
             }
+            }
             workbook1.close(); //close the file
         } catch (BiffException | IOException ex) {
-
+            System.out.println(ex.getMessage());
         }
 
     }

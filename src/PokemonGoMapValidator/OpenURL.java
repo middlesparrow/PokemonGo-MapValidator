@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -55,7 +56,12 @@ public class OpenURL {
 
 
 
-        } catch (Exception ex) {
+        } 
+        catch (TimeoutException ex) {
+            responseCode = "408";
+            return responseCode;
+        }
+        catch (Exception ex) {
             return ex.getMessage();
         }
         return responseCode;
