@@ -25,7 +25,7 @@ import org.apache.commons.cli.Option;
 
 public class Cli {
 
-    private static final Logger log = Logger.getLogger(Cli.class.getName());
+    private Logger log = Logger.getLogger(Cli.class.getName());
     private String[] args = null;
     private Options options = new Options();
 

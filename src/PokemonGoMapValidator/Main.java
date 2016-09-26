@@ -45,7 +45,7 @@ public class Main {
 
                 try {
 
-                    File mataInstancia = new File(currentDirectory + "/" + "mataCR.bat");
+                    File mataInstancia = new File(currentDirectory + "/files/" + "mataCR.bat");
                     if (mataInstancia.exists()) {
                         //System.out.println(mataInstancia.getAbsolutePath());
                         Runtime.getRuntime().exec("cmd /c " + "\"" + mataInstancia.getAbsolutePath() + "\"");
@@ -53,37 +53,37 @@ public class Main {
                     }
                     else
                     {
-                        System.out.println("File " + currentDirectory + "/" + "mataCR.bat" + " is missing, but not required.");
+                        System.out.println("File " + currentDirectory + "/files/" + "mataCR.bat" + " is missing, but not required.");
                     }
 
-                    File driverFileExists = new File(currentDirectory + "/" + "chromedriver.exe");
+                    File driverFileExists = new File(currentDirectory + "/files/" + "chromedriver.exe");
                     if (driverFileExists.exists()) {
-                        driverFile = currentDirectory + "/" + "chromedriver.exe";
+                        driverFile = currentDirectory + "/files/" + "chromedriver.exe";
                         
                     }
                     else
                     {
-                        System.out.println("File " + currentDirectory + "/" + "chromedriver.exe" + " is missing.");
+                        System.out.println("File " + currentDirectory + "/files/" + "chromedriver.exe" + " is missing.");
                         exit = 1;
                     }
 
-                    File profileFileExists = new File(currentDirectory + "/" + "chromeprofile.zip");
+                    File profileFileExists = new File(currentDirectory + "/files/" + "chromeprofile.zip");
                     if (profileFileExists.exists()) {
-                        profileFile = currentDirectory + "/" + "chromeprofile.zip";
+                        profileFile = currentDirectory + "/files/" + "chromeprofile.zip";
                     }
                     else
                     {
-                        System.out.println("File " + currentDirectory + "/" + "chromeprofile.zip" + " is missing.");
+                        System.out.println("File " + currentDirectory + "/files/" + "chromeprofile.zip" + " is missing.");
                         exit = 1;
                     }
                     
-                    File mapFileExists = new File(currentDirectory + "/" + "mapvalidator.xls");
+                    File mapFileExists = new File(currentDirectory + "/mapvalidator/" + "mapvalidator.xls");
                     if (mapFileExists.exists()) {
-                        mapFile = currentDirectory + "/" + "mapvalidator.xls";
+                        mapFile = currentDirectory + "/mapvalidator/" + "mapvalidator.xls";
                     }
                     else
                     {
-                        System.out.println("File " + currentDirectory + "/" + "mapvalidator.xls" + " is missing.");
+                        System.out.println("File " + currentDirectory + "/mapvalidator/" + "mapvalidator.xls" + " is missing.");
                         exit = 1;
                         
                     }

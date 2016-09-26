@@ -30,7 +30,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class RunComparison {
 
-    private static Logger log = Logger.getLogger(RunComparison.class.getName());
+    private Logger log = Logger.getLogger(RunComparison.class.getName());
 
     public void RunComparison() {
 
@@ -194,7 +194,7 @@ public class RunComparison {
             subjectList.add("No data was loaded!");
         }
 
-        //sends to log
+        //sends to console and log
         for (int i = 0; i < subjectList.size(); i++) {
             System.out.println(subjectList.get(i));
             log.info(subjectList.get(i));
