@@ -12,17 +12,17 @@ They are running on a previous, more light, version of the project https://githu
 1 - Takes a screenshot of the empty map. All Options are disabled using Selenium.
 http://pokemap.oinkandstuff.com:5011/
 
-![without Pokémon](https://github.com/middlesparrow/PokemonGo-MapValidator/tree/master/images/semPokemongos.png)
+![without Pokémon](/images/semPokemongos.png)
 
 
 2 - Takes a screenshot of the map with pokemons. Only Options->Pokémon is enabled using Selenium.
 
-![with Pokémon](https://github.com/middlesparrow/PokemonGo-MapValidator/tree/master/images/comPokemongos.png)
+![with Pokémon](/images/comPokemongos.png)
 
 
 3 - Generates a picture with the differences. This picture is not important, it's just an option of the library I used.
 
-![result](https://github.com/middlesparrow/PokemonGo-MapValidator/tree/master/images/vila-real.jpg)
+![result](/images/vila-real.jpg)
 
 
 # What is does
