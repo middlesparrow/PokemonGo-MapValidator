@@ -26,6 +26,9 @@ public class Main {
     public static int LOADINGPOKEMONGOS;
     public static int PAGELOADING;
     public static int MAPDIMENSION;
+    public static int XCOORD;
+    public static int YCOORD;
+    public static boolean VALIDATEBROWSER;
 
     public static void main(String[] args) throws IOException, InterruptedException, ParseException {
         // TODO code application logic here

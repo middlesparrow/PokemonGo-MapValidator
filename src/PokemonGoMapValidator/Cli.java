@@ -19,7 +19,10 @@ import static PokemonGoMapValidator.Main.PASS;
 import static PokemonGoMapValidator.Main.LOADINGPOKEMONGOS;
 import static PokemonGoMapValidator.Main.PAGELOADING;
 import static PokemonGoMapValidator.Main.VALIDATEURL;
+import static PokemonGoMapValidator.Main.VALIDATEBROWSER;
 import static PokemonGoMapValidator.Main.MAPDIMENSION;
+import static PokemonGoMapValidator.Main.XCOORD;
+import static PokemonGoMapValidator.Main.YCOORD;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 
@@ -35,7 +38,6 @@ public class Cli {
 
         LOADINGPOKEMONGOS = 10000;
         PAGELOADING = 10000;
-        MAPDIMENSION = 800;
         VALIDATEURL = false;
         LOGIN = "";
         PASS = "";
@@ -83,11 +85,29 @@ public class Cli {
 
         Option mapDimension = Option.builder("md")
                 .longOpt("map-dimension") //another calling for the option
-                .desc("TODO: Map dimension it's a square. Default: " + MAPDIMENSION + "*" + MAPDIMENSION + " image") //description
+                .desc("Square dimension (more or less...) Default: full screen") //description
                 .required(false) //option required
                 .hasArg(true) //the option has arguments
                 .numberOfArgs(1) //number of arguments
-                .argName("xxx") //arg template
+                .argName("\"square\" size") //arg template
+                .build(); //build!!
+        
+        Option positionX= Option.builder("px")
+                .longOpt("x-coord") //another calling for the option
+                .desc("") //description
+                .required(false) //option required
+                .hasArg(true) //the option has arguments
+                .numberOfArgs(1) //number of arguments
+                .argName("position x") //arg template
+                .build(); //build!!
+        
+        Option positionY= Option.builder("py")
+                .longOpt("y-coord") //another calling for the option
+                .desc("") //description
+                .required(false) //option required
+                .hasArg(true) //the option has arguments
+                .numberOfArgs(1) //number of arguments
+                .argName("position y") //arg template
                 .build(); //build!!
 
         Option validateUrl = Option.builder("v")
@@ -108,75 +128,143 @@ public class Cli {
                 .argName("email") //arg template
                 .build(); //build!!
 
+        Option graphicsInfo = Option.builder("gi")
+                .longOpt("graphics-info") //another calling for the option
+                .desc("x y width height of every screen") //description
+                .required(false) //option required
+                .hasArg(false) //the option has arguments
+                .numberOfArgs(0) //number of arguments
+                //.argName("email") //arg template
+                .build(); //build!!
+
+        Option graphicsDevice = Option.builder("gd")
+                .longOpt("graphics-device") //another calling for the option
+                .desc("select screen") //description
+                .required(false) //option required
+                .hasArg(true) //the option has arguments
+                .numberOfArgs(1) //number of arguments
+                .argName("0 to ?") //arg template
+                .build(); //build!!
+
         options.addOption(login);
         options.addOption(password);
         options.addOption(emailDest);
         options.addOption(pageLoading);
         options.addOption(loadinPokemongo);
-        //options.addOption(mapDimension);
+        options.addOption(mapDimension);
+        options.addOption(positionX);
+        options.addOption(positionY);
+        options.addOption(graphicsInfo);
+        //options.addOption(graphicsDevice);
         //options.addOption(validateUrl);
 
     }
 
     public void parse() {
         CommandLineParser parser = new DefaultParser();
+        int countDevice;
 
         CommandLine cmd = null;
         try {
             //validate the options
             cmd = parser.parse(options, args);
-
+            
             if (cmd.hasOption("h")) {
                 help();
             }
 
-            if (cmd.hasOption("l")) {
-                log.log(Level.INFO, "Using argument -l={0}", cmd.getParsedOptionValue("l"));
-                LOGIN = cmd.getOptionValue("l");
-                EMAIL_DEST = cmd.getOptionValue("l");
-
+            if (cmd.hasOption("gi")) {
+                //log.log(Level.INFO, "Using argument -gi={0}", cmd.getParsedOptionValue("gi"));
+                VALIDATEBROWSER = false;
+                new Graphics().graphicsDevice();
             }
 
-            if (cmd.hasOption("p")) {
-                log.log(Level.INFO, "Using argument -p={0}", cmd.getParsedOptionValue("p"));
-                PASS = cmd.getOptionValue("p");
-
-            }
+            //work this in the future
+            //place the browser in "0,0" of the selected screen
+//            if (cmd.hasOption("gd")) {
+//                countDevice = new Graphics().existsGraphicsDevice();
+//
+//                if (countDevice > 0) {
+//                    if (countDevice >= Integer.parseInt(cmd.getOptionValue("gd")) + 1) {
+//                        //fazer as contas para colocar no device escolhido
+//                    } else {
+//                        System.out.println("Device not found. Max: " + countDevice + "; Argument: " + Integer.parseInt(cmd.getOptionValue("gd")));
+//                        new Graphics().graphicsDevice();
+//                    }
+//                } else {
+//                    //vai existir sempre um, pelo que fica no default
+//                }
+//            }
             
             if (cmd.hasOption("l") && !cmd.hasOption("p")) {
                 log.log(Level.SEVERE, "Missing p option");
                 help();
             }
+            
             if (cmd.hasOption("p") && !cmd.hasOption("l")) {
                 log.log(Level.SEVERE, "Missing l option");
                 help();
+            }
+            
+            if (cmd.hasOption("d") && !cmd.hasOption("l")) {
+                log.log(Level.SEVERE, "Missing l option");
+                help();
+            }
+            
+            
+            if (cmd.hasOption("l")) {
+                log.log(Level.INFO, "Using argument -l={0}", cmd.getParsedOptionValue("l"));
+                LOGIN = cmd.getOptionValue("l");
+                EMAIL_DEST = cmd.getOptionValue("l");
+            }
+
+            if (cmd.hasOption("p")) {
+                log.log(Level.INFO, "Using argument -p={0}", cmd.getParsedOptionValue("p"));
+                PASS = cmd.getOptionValue("p");
+            }
+            
+            if (cmd.hasOption("d")) {
+                log.log(Level.INFO, "Using argument -d={0}", cmd.getParsedOptionValue("d"));
+                EMAIL_DEST = cmd.getOptionValue("d");
             }
 
             if (cmd.hasOption("pl")) {
                 log.log(Level.INFO, "Using argument -pl={0}", cmd.getParsedOptionValue("pl"));
                 PAGELOADING = Integer.parseInt(cmd.getOptionValue("pl"));
-
             }
 
             if (cmd.hasOption("lp")) {
                 log.log(Level.INFO, "Using argument -lp={0}", cmd.getParsedOptionValue("lp"));
                 LOADINGPOKEMONGOS = Integer.parseInt(cmd.getOptionValue("lp"));
             }
-
-            if (cmd.hasOption("d")) {
-                log.log(Level.INFO, "Using argument -d={0}", cmd.getParsedOptionValue("d"));
-                    EMAIL_DEST = cmd.getOptionValue("d");
-               
-
+            
+            if (cmd.hasOption("md")) {
+                log.log(Level.INFO, "Using argument -md={0}", cmd.getParsedOptionValue("md"));
+                MAPDIMENSION = Integer.parseInt(cmd.getOptionValue("md"));
             }
-/*
+            
+            if (cmd.hasOption("px") && !cmd.hasOption("py")) {
+                log.log(Level.INFO, "py: default value");
+            }
+            if (cmd.hasOption("py") && !cmd.hasOption("px")) {
+                log.log(Level.INFO, "px: default value");
+            }
+            if (cmd.hasOption("px")) {
+                log.log(Level.INFO, "Using argument -px={0}", cmd.getParsedOptionValue("px"));
+                XCOORD = Integer.parseInt(cmd.getOptionValue("px"));
+            }
+            if (cmd.hasOption("py")) {
+                log.log(Level.INFO, "Using argument -py={0}", cmd.getParsedOptionValue("py"));
+                YCOORD = Integer.parseInt(cmd.getOptionValue("py"));
+            }
+
+            /*
             if (cmd.hasOption("v")) {
                 log.log(Level.INFO, "Using argument -v");
                 VALIDATEURL = true;
 
             }
-*/
-
+             */
         } catch (ParseException | NumberFormatException e) {
             System.out.println(e.getMessage());
             help();
@@ -191,4 +279,5 @@ public class Cli {
         formater.printHelp("Image Comparison", options);
         System.exit(0);
     }
+
 }

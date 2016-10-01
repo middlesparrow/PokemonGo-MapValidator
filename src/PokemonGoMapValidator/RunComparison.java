@@ -18,11 +18,11 @@ import org.apache.log4j.Logger;
 import org.frontendtest.components.ImageComparison;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
@@ -42,23 +42,22 @@ public class RunComparison {
         List<WebElement> extra = new ArrayList<>();
         List<String> subjectList = new ArrayList<>();
         List<String> attachmentList = new ArrayList<>();
-        WebDriverWait wait = new WebDriverWait(driver, 15);
         WebElement formElement;
         OpenURL openURL = new OpenURL();
         String localPrtscFile = "semPokemongos.png";
         String urlPrtscFile = "comPokemongos.png";
         String comPokemongos = currentDirectory + "/prints/";
         String semPokemongos = currentDirectory + "/prints/";
-        String diferencasPath = currentDirectory + "/prints/";
-        String diferencasFile = "";
+        String comparisonPath = currentDirectory + "/prints/";
+        String comparisonFile = "";
         String baseUrl = "";
         int count = 0;
         int countTot = 0;
         int optionsAnimation = 1000;
         String responseCode = "";
+        boolean zoom = false;
 
-        //pokemongos grow in sextagon shape, so I will force a square resolution
-        driver.manage().window().setSize(new Dimension(MAPDIMENSION, MAPDIMENSION));
+        
 
         //50*50 is the size of the squares to compare //much bigger and they start to fail
         ImageComparison imageComparison = new ImageComparison(50, 50, 0);
@@ -79,6 +78,9 @@ public class RunComparison {
                     }
                     if (f.isDirectory()) {
 
+                        //it is not necessary to clean the directory, but I'm doing it
+                        FileUtils.cleanDirectory(f);
+
                         //validate url
                         baseUrl = links.get(i);
 
@@ -92,6 +94,19 @@ public class RunComparison {
                             //wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Options']")));
                             extra = driver.findElements(By.xpath("//span[text()='Options']"));
                             if (extra.size() > 0) {
+                                
+                                //this area runs if we define a zoom in or out
+                                //first it zooms in so that the zoom out can be controled
+                                if (zoom == true)
+                                {
+                                formElement = driver.findElement(By.xpath("//area"));
+                                formElement.click();
+                                
+                                formElement.sendKeys(Keys.chord(Keys.ADD));
+                                formElement.sendKeys(Keys.chord(Keys.SUBTRACT));
+                                
+                                }
+                                        
                                 formElement = driver.findElement(By.xpath("//span[text()='Options']"));
                                 formElement.click();
                                 Thread.sleep(optionsAnimation);
@@ -142,7 +157,7 @@ public class RunComparison {
 
                                 String imgOriginal = semPokemongos + links.get(i + 1) + "/" + localPrtscFile;
                                 String imgToCompareWithOriginal = comPokemongos + links.get(i + 1) + "/" + urlPrtscFile;
-                                String imgOutputDifferences = diferencasPath + links.get(i + 1) + "/" + diferencasFile + links.get(i + 1) + ".jpg";
+                                String imgOutputDifferences = comparisonPath + links.get(i + 1) + "/" + comparisonFile + links.get(i + 1) + ".jpg";
 
                                 if (imageComparison.fuzzyEqual(imgOriginal, imgToCompareWithOriginal, imgOutputDifferences)) {
                                     System.out.println("Location without pokémon: " + links.get(i + 1) + " - " + LOADINGPOKEMONGOS + "ms");

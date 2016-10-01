@@ -5,12 +5,17 @@
  */
 package PokemonGoMapValidator;
 
+import static PokemonGoMapValidator.Main.MAPDIMENSION;
+import static PokemonGoMapValidator.Main.XCOORD;
+import static PokemonGoMapValidator.Main.YCOORD;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -62,6 +67,41 @@ public class Config {
             capabilities.setCapability(ChromeOptions.CAPABILITY, options);
             webDriver = new ChromeDriver(capabilities);
 
+            //pokemongos grow in sextagon shape, so I will force a square resolution
+            webDriver.manage().window().setPosition(new Point(XCOORD, YCOORD));
+            if (MAPDIMENSION>0)
+            {
+            webDriver.manage().window().setSize(new Dimension(MAPDIMENSION, MAPDIMENSION));
+            }
+            else
+            {
+                webDriver.manage().window().maximize();
+            }
+            
+            //in the code below, I tried to create a square, but the width's and height's
+            //seem to change, and I didn't figured out why and how
+            //TODO in the future
+            /*
+            webDriver.get("http://www.google.com");
+            Thread.sleep(1000);
+            Dimension win_size = webDriver.manage().window().getSize();
+
+            WebElement html = webDriver.findElement(By.tagName("html"));
+            int inner_width = Integer.parseInt(html.getAttribute("clientWidth"));
+            int outer_width = win_size.width - inner_width;
+            int inner_height = Integer.parseInt(html.getAttribute("clientHeight"));
+            int outer_height = win_size.height - inner_height;
+
+            //pokemongos grow in sextagon shape, so I will force a square resolution
+            webDriver.manage().window().setPosition(new Point(0, -1080));
+            webDriver.manage().window().setSize(new Dimension(800 + outer_width, 600 + outer_height));
+
+            if (VALIDATEBROWSER) {
+                new Graphics().browserDimension(webDriver);
+            }
+
+            */
+            
             RunComparison comparison = new RunComparison();
             comparison.comparison(currentDirectory, webDriver, mapFile);
 
