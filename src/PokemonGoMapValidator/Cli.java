@@ -23,6 +23,8 @@ import static PokemonGoMapValidator.Main.VALIDATEBROWSER;
 import static PokemonGoMapValidator.Main.MAPDIMENSION;
 import static PokemonGoMapValidator.Main.XCOORD;
 import static PokemonGoMapValidator.Main.YCOORD;
+import static PokemonGoMapValidator.Main.ZOOMIN;
+import static PokemonGoMapValidator.Main.ZOOMOUT;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 
@@ -110,15 +112,24 @@ public class Cli {
                 .argName("position y") //arg template
                 .build(); //build!!
 
-        Option validateUrl = Option.builder("v")
-                .longOpt("validate-url") //another calling for the option
-                .desc("TODO: Validate URL. Default: " + VALIDATEURL) //description
+        Option zoomIn= Option.builder("zi")
+                .longOpt("zoom-in") //another calling for the option
+                .desc("") //description
                 .required(false) //option required
-                .hasArg(false) //the option has arguments
-                .numberOfArgs(0) //number of arguments
-                //.argName("xxx") //arg template
+                .hasArg(true) //the option has arguments
+                .numberOfArgs(1) //number of arguments
+                .argName("zoom in") //arg template
                 .build(); //build!!
-
+        
+        Option zoomOut= Option.builder("zo")
+                .longOpt("zoom out") //another calling for the option
+                .desc("") //description
+                .required(false) //option required
+                .hasArg(true) //the option has arguments
+                .numberOfArgs(1) //number of arguments
+                .argName("zoom out") //arg template
+                .build(); //build!!
+        
         Option emailDest = Option.builder("d")
                 .longOpt("email-dest") //another calling for the option
                 .desc("email destination. Default: login email") //description
@@ -136,7 +147,16 @@ public class Cli {
                 .numberOfArgs(0) //number of arguments
                 //.argName("email") //arg template
                 .build(); //build!!
-
+        
+        Option validateUrl = Option.builder("v")
+                .longOpt("validate-url") //another calling for the option
+                .desc("TODO: Validate URL. Default: " + VALIDATEURL) //description
+                .required(false) //option required
+                .hasArg(false) //the option has arguments
+                .numberOfArgs(0) //number of arguments
+                //.argName("xxx") //arg template
+                .build(); //build!!
+        
         Option graphicsDevice = Option.builder("gd")
                 .longOpt("graphics-device") //another calling for the option
                 .desc("select screen") //description
@@ -154,6 +174,8 @@ public class Cli {
         options.addOption(mapDimension);
         options.addOption(positionX);
         options.addOption(positionY);
+        options.addOption(zoomIn);
+        options.addOption(zoomOut);
         options.addOption(graphicsInfo);
         //options.addOption(graphicsDevice);
         //options.addOption(validateUrl);
@@ -256,6 +278,15 @@ public class Cli {
             if (cmd.hasOption("py")) {
                 log.log(Level.INFO, "Using argument -py={0}", cmd.getParsedOptionValue("py"));
                 YCOORD = Integer.parseInt(cmd.getOptionValue("py"));
+            }
+            
+            if (cmd.hasOption("zi")) {
+                log.log(Level.INFO, "Using argument -zi={0}", cmd.getParsedOptionValue("zi"));
+                ZOOMIN = Integer.parseInt(cmd.getOptionValue("zi"));
+            }
+            if (cmd.hasOption("zo")) {
+                log.log(Level.INFO, "Using argument -zo={0}", cmd.getParsedOptionValue("zo"));
+                ZOOMOUT = Integer.parseInt(cmd.getOptionValue("zo"));
             }
 
             /*

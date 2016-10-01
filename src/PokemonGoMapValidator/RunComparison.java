@@ -9,6 +9,8 @@ import static PokemonGoMapValidator.Main.LOADINGPOKEMONGOS;
 import static PokemonGoMapValidator.Main.MAPDIMENSION;
 import static PokemonGoMapValidator.Main.LOGIN;
 import static PokemonGoMapValidator.Main.PAGELOADING;
+import static PokemonGoMapValidator.Main.ZOOMIN;
+import static PokemonGoMapValidator.Main.ZOOMOUT;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +25,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
@@ -55,9 +59,7 @@ public class RunComparison {
         int countTot = 0;
         int optionsAnimation = 1000;
         String responseCode = "";
-        boolean zoom = false;
-
-        
+        WebDriverWait wait = new WebDriverWait(driver, 15);
 
         //50*50 is the size of the squares to compare //much bigger and they start to fail
         ImageComparison imageComparison = new ImageComparison(50, 50, 0);
@@ -94,19 +96,27 @@ public class RunComparison {
                             //wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Options']")));
                             extra = driver.findElements(By.xpath("//span[text()='Options']"));
                             if (extra.size() > 0) {
-                                
+
                                 //this area runs if we define a zoom in or out
                                 //first it zooms in so that the zoom out can be controled
-                                if (zoom == true)
-                                {
-                                formElement = driver.findElement(By.xpath("//area"));
-                                formElement.click();
-                                
-                                formElement.sendKeys(Keys.chord(Keys.ADD));
-                                formElement.sendKeys(Keys.chord(Keys.SUBTRACT));
-                                
+                                if (ZOOMIN > 0 || ZOOMOUT > 0) {
+                                    extra = driver.findElements(By.xpath("//area"));
+
+                                    if (extra.size() > 0)
+                                    {
+                                    formElement = driver.findElement(By.xpath("//area"));
+                                    formElement.click();
+                                    
+                                    for (int k = 1; k <= ZOOMIN; k++) {
+                                        formElement.sendKeys(Keys.chord(Keys.ADD));
+                                    }
+                                    for (int l = 1; l <= ZOOMOUT; l++) {
+                                        formElement.sendKeys(Keys.chord(Keys.SUBTRACT));
+                                    }
+                                    }
+
                                 }
-                                        
+
                                 formElement = driver.findElement(By.xpath("//span[text()='Options']"));
                                 formElement.click();
                                 Thread.sleep(optionsAnimation);
