@@ -11,6 +11,7 @@ import static PokemonGoMapValidator.Main.LOGIN;
 import static PokemonGoMapValidator.Main.PAGELOADING;
 import static PokemonGoMapValidator.Main.ZOOMIN;
 import static PokemonGoMapValidator.Main.ZOOMOUT;
+import static com.google.common.io.Files.map;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import org.apache.log4j.Logger;
 import org.frontendtest.components.ImageComparison;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -82,7 +84,9 @@ public class RunComparison {
 
                         //it is not necessary to clean the directory, but I'm doing it
                         FileUtils.cleanDirectory(f);
+                        
 
+                                
                         //validate url
                         baseUrl = links.get(i);
 
@@ -96,23 +100,32 @@ public class RunComparison {
                             //wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Options']")));
                             extra = driver.findElements(By.xpath("//span[text()='Options']"));
                             if (extra.size() > 0) {
+                                
+
 
                                 //this area runs if we define a zoom in or out
                                 //first it zooms in so that the zoom out can be controled
                                 if (ZOOMIN > 0 || ZOOMOUT > 0) {
-                                    extra = driver.findElements(By.xpath("//area"));
 
+                                    //"area" is the id of the maps red marker
+                                    //this marker seems to be always present when latitude ans longitude is used
+                                    //when a town name is searched, sometimes the red marker is not shown
+                                    //so, the zoom is not perfect at this time
+                                    extra = driver.findElements(By.xpath("//area"));
                                     if (extra.size() > 0)
                                     {
                                     formElement = driver.findElement(By.xpath("//area"));
                                     formElement.click();
-                                    
                                     for (int k = 1; k <= ZOOMIN; k++) {
                                         formElement.sendKeys(Keys.chord(Keys.ADD));
                                     }
                                     for (int l = 1; l <= ZOOMOUT; l++) {
                                         formElement.sendKeys(Keys.chord(Keys.SUBTRACT));
                                     }
+                                    }
+                                    else
+                                    {
+                                        System.out.println("Google maps red marker not found. Zoom was not applied.");
                                     }
 
                                 }
@@ -184,8 +197,8 @@ public class RunComparison {
                                 countTot++;
 
                             } else {
-                                System.out.println("Probably there is an error with the url: " + links.get(i) + " - Location: " + links.get(i + 1));
-                                subjectList.add("Probably there is an error with the url: " + links.get(i) + " - Location: " + links.get(i + 1));
+                                System.out.println("Map dimension might be to small and the Options menu isn't visible, or probably there is an error with the url: " + links.get(i) + " - Location: " + links.get(i + 1));
+                                subjectList.add("Map dimension might be to small and the Options menu isn't visible, or probablyrobably there is an error with the url: " + links.get(i) + " - Location: " + links.get(i + 1));
                                 countTot++;
                             }
 

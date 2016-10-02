@@ -114,7 +114,7 @@ public class Cli {
 
         Option zoomIn= Option.builder("zi")
                 .longOpt("zoom-in") //another calling for the option
-                .desc("") //description
+                .desc("zoom might be tricky to work with...") //description
                 .required(false) //option required
                 .hasArg(true) //the option has arguments
                 .numberOfArgs(1) //number of arguments
@@ -123,7 +123,7 @@ public class Cli {
         
         Option zoomOut= Option.builder("zo")
                 .longOpt("zoom out") //another calling for the option
-                .desc("") //description
+                .desc("zoom might be tricky to work with...") //description
                 .required(false) //option required
                 .hasArg(true) //the option has arguments
                 .numberOfArgs(1) //number of arguments
@@ -252,17 +252,44 @@ public class Cli {
 
             if (cmd.hasOption("pl")) {
                 log.log(Level.INFO, "Using argument -pl={0}", cmd.getParsedOptionValue("pl"));
+                
+                if (Integer.parseInt(cmd.getOptionValue("pl")) > 0)
+                {
                 PAGELOADING = Integer.parseInt(cmd.getOptionValue("pl"));
+                }
+                else
+                {
+                    log.log(Level.SEVERE, "pl needs to be > 0");
+                }
+                
             }
 
             if (cmd.hasOption("lp")) {
                 log.log(Level.INFO, "Using argument -lp={0}", cmd.getParsedOptionValue("lp"));
+                
+                if (Integer.parseInt(cmd.getOptionValue("lp")) > 0)
+                {
                 LOADINGPOKEMONGOS = Integer.parseInt(cmd.getOptionValue("lp"));
+                }
+                else
+                {
+                    log.log(Level.SEVERE, "lp needs to be > 0");
+                }
+                
+                
             }
             
             if (cmd.hasOption("md")) {
                 log.log(Level.INFO, "Using argument -md={0}", cmd.getParsedOptionValue("md"));
+                if (Integer.parseInt(cmd.getOptionValue("md")) > 0)
+                {
                 MAPDIMENSION = Integer.parseInt(cmd.getOptionValue("md"));
+                }
+                else
+                {
+                    log.log(Level.SEVERE, "md needs to be > 0");
+                }
+                
             }
             
             if (cmd.hasOption("px") && !cmd.hasOption("py")) {
@@ -282,11 +309,30 @@ public class Cli {
             
             if (cmd.hasOption("zi")) {
                 log.log(Level.INFO, "Using argument -zi={0}", cmd.getParsedOptionValue("zi"));
+                
+                if (Integer.parseInt(cmd.getOptionValue("zi")) > 0)
+                {
                 ZOOMIN = Integer.parseInt(cmd.getOptionValue("zi"));
+                }
+                else
+                {
+                    log.log(Level.SEVERE, "zi needs to be > 0");
+                }
+                
+                
             }
             if (cmd.hasOption("zo")) {
                 log.log(Level.INFO, "Using argument -zo={0}", cmd.getParsedOptionValue("zo"));
+                
+                if (Integer.parseInt(cmd.getOptionValue("zo")) > 0)
+                {
                 ZOOMOUT = Integer.parseInt(cmd.getOptionValue("zo"));
+                }
+                else
+                {
+                    log.log(Level.SEVERE, "zo needs to be > 0");
+                }
+                
             }
 
             /*
