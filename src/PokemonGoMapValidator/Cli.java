@@ -23,8 +23,7 @@ import static PokemonGoMapValidator.Main.VALIDATEBROWSER;
 import static PokemonGoMapValidator.Main.MAPDIMENSION;
 import static PokemonGoMapValidator.Main.XCOORD;
 import static PokemonGoMapValidator.Main.YCOORD;
-import static PokemonGoMapValidator.Main.ZOOMIN;
-import static PokemonGoMapValidator.Main.ZOOMOUT;
+import static PokemonGoMapValidator.Main.ZOOMINOROUT;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 
@@ -112,22 +111,13 @@ public class Cli {
                 .argName("position y") //arg template
                 .build(); //build!!
 
-        Option zoomIn= Option.builder("zi")
+        Option zoom= Option.builder("z")
                 .longOpt("zoom-in") //another calling for the option
-                .desc("zoom might be tricky to work with...") //description
+                .desc("zoom in or out") //description
                 .required(false) //option required
                 .hasArg(true) //the option has arguments
                 .numberOfArgs(1) //number of arguments
-                .argName("zoom in") //arg template
-                .build(); //build!!
-        
-        Option zoomOut= Option.builder("zo")
-                .longOpt("zoom out") //another calling for the option
-                .desc("zoom might be tricky to work with...") //description
-                .required(false) //option required
-                .hasArg(true) //the option has arguments
-                .numberOfArgs(1) //number of arguments
-                .argName("zoom out") //arg template
+                .argName("units or negative units") //arg template
                 .build(); //build!!
         
         Option emailDest = Option.builder("d")
@@ -174,8 +164,7 @@ public class Cli {
         options.addOption(mapDimension);
         options.addOption(positionX);
         options.addOption(positionY);
-        options.addOption(zoomIn);
-        options.addOption(zoomOut);
+        options.addOption(zoom);
         options.addOption(graphicsInfo);
         //options.addOption(graphicsDevice);
         //options.addOption(validateUrl);
@@ -307,32 +296,9 @@ public class Cli {
                 YCOORD = Integer.parseInt(cmd.getOptionValue("py"));
             }
             
-            if (cmd.hasOption("zi")) {
-                log.log(Level.INFO, "Using argument -zi={0}", cmd.getParsedOptionValue("zi"));
-                
-                if (Integer.parseInt(cmd.getOptionValue("zi")) > 0)
-                {
-                ZOOMIN = Integer.parseInt(cmd.getOptionValue("zi"));
-                }
-                else
-                {
-                    log.log(Level.SEVERE, "zi needs to be > 0");
-                }
-                
-                
-            }
-            if (cmd.hasOption("zo")) {
-                log.log(Level.INFO, "Using argument -zo={0}", cmd.getParsedOptionValue("zo"));
-                
-                if (Integer.parseInt(cmd.getOptionValue("zo")) > 0)
-                {
-                ZOOMOUT = Integer.parseInt(cmd.getOptionValue("zo"));
-                }
-                else
-                {
-                    log.log(Level.SEVERE, "zo needs to be > 0");
-                }
-                
+            if (cmd.hasOption("z")) {
+                log.log(Level.INFO, "Using argument -z={0}", cmd.getParsedOptionValue("z"));
+                ZOOMINOROUT = Integer.parseInt(cmd.getOptionValue("z"));
             }
 
             /*

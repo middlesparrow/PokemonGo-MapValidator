@@ -28,8 +28,7 @@ public class Main {
     public static int MAPDIMENSION;
     public static int XCOORD;
     public static int YCOORD;
-    public static int ZOOMIN;
-    public static int ZOOMOUT;
+    public static int ZOOMINOROUT;
     public static boolean VALIDATEBROWSER;
 
     public static void main(String[] args) throws IOException, InterruptedException, ParseException {

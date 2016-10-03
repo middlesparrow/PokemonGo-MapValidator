@@ -6,12 +6,9 @@
 package PokemonGoMapValidator;
 
 import static PokemonGoMapValidator.Main.LOADINGPOKEMONGOS;
-import static PokemonGoMapValidator.Main.MAPDIMENSION;
 import static PokemonGoMapValidator.Main.LOGIN;
 import static PokemonGoMapValidator.Main.PAGELOADING;
-import static PokemonGoMapValidator.Main.ZOOMIN;
-import static PokemonGoMapValidator.Main.ZOOMOUT;
-import static com.google.common.io.Files.map;
+import static PokemonGoMapValidator.Main.ZOOMINOROUT;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,15 +17,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.frontendtest.components.ImageComparison;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
@@ -61,7 +54,6 @@ public class RunComparison {
         int countTot = 0;
         int optionsAnimation = 1000;
         String responseCode = "";
-        WebDriverWait wait = new WebDriverWait(driver, 15);
 
         //50*50 is the size of the squares to compare //much bigger and they start to fail
         ImageComparison imageComparison = new ImageComparison(50, 50, 0);
@@ -104,8 +96,8 @@ public class RunComparison {
 
 
                                 //this area runs if we define a zoom in or out
-                                //first it zooms in so that the zoom out can be controled
-                                if (ZOOMIN > 0 || ZOOMOUT > 0) {
+                                //first it zooms in and then zooms out
+                                if (ZOOMINOROUT != 0) {
 
                                     //"area" is the id of the maps red marker
                                     //this marker seems to be always present when latitude ans longitude is used
@@ -116,11 +108,19 @@ public class RunComparison {
                                     {
                                     formElement = driver.findElement(By.xpath("//area"));
                                     formElement.click();
-                                    for (int k = 1; k <= ZOOMIN; k++) {
-                                        formElement.sendKeys(Keys.chord(Keys.ADD));
-                                    }
-                                    for (int l = 1; l <= ZOOMOUT; l++) {
+
+                                    if (ZOOMINOROUT < 0)
+                                    {
+                                    for (int k = 1; k <= ZOOMINOROUT * (-1); k++) {
                                         formElement.sendKeys(Keys.chord(Keys.SUBTRACT));
+                                    }
+                                    }
+                                    
+                                    if (ZOOMINOROUT > 0)
+                                    {
+                                     for (int k = 1; k <= ZOOMINOROUT; k++) {
+                                        formElement.sendKeys(Keys.chord(Keys.ADD));
+                                    }   
                                     }
                                     }
                                     else
