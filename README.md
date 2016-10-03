@@ -48,6 +48,11 @@ If the gmail account you want to use has the 2-step verification, refer to this 
  -d,--email-dest <email> | email destination. Default: login email  
  -pl,--page-loading <value ms> | wait for the page to load: Default: 10000 miliseconds  
  -lp,--loading-pokemongo <value ms> | wait for pokemongo to load. Default: 10000 miliseconds
+ -md,--map-dimension <"square" size> | Square dimension (more or less...). Default: full screen
+ -px,--x-coord <position x> | Check graphics-info
+ -py,--y-coord <position y> | Check graphics-info
+ -z,--zoom <units or negative units> | zoom in or out
+ -gi,--graphics-info | x-coord y-coord width height of every screen
  
  mapvalidator.xls - place the maps in this file. Make a copy of mapvalidator-template.xls if necessary.
  
@@ -65,6 +70,6 @@ If the gmail account you want to use has the 2-step verification, refer to this 
  - selenium-server-standalone-2.53.1
 
 # ToDo
- - Daily log;
- - Argument for changing image size (currently 800*800)
-
+ - Daily log instead of just one file;
+ - Map dimension needs to be worked on;
+ - Graphics device: select the device where to send the browser more easily than x-y coords;

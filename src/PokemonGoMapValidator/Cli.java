@@ -95,7 +95,7 @@ public class Cli {
         
         Option positionX= Option.builder("px")
                 .longOpt("x-coord") //another calling for the option
-                .desc("") //description
+                .desc("Check graphics-info") //description
                 .required(false) //option required
                 .hasArg(true) //the option has arguments
                 .numberOfArgs(1) //number of arguments
@@ -104,7 +104,7 @@ public class Cli {
         
         Option positionY= Option.builder("py")
                 .longOpt("y-coord") //another calling for the option
-                .desc("") //description
+                .desc("Check graphics-info") //description
                 .required(false) //option required
                 .hasArg(true) //the option has arguments
                 .numberOfArgs(1) //number of arguments
@@ -112,7 +112,7 @@ public class Cli {
                 .build(); //build!!
 
         Option zoom= Option.builder("z")
-                .longOpt("zoom-in") //another calling for the option
+                .longOpt("zoom") //another calling for the option
                 .desc("zoom in or out") //description
                 .required(false) //option required
                 .hasArg(true) //the option has arguments
