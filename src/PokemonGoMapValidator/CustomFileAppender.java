@@ -13,14 +13,14 @@ package PokemonGoMapValidator;
  * @author Altran
  */
 public class CustomFileAppender  extends  FileAppender{
-    @Override
-    public void setFile(String fileName)
-    {
-        if (fileName.contains("%timestamp")) {
-            Date d = new Date();
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSS");
-            fileName = fileName.replaceAll("%timestamp", format.format(d));
-        }
-        super.setFile(fileName);
-   } 
+//    @Override
+//    public void setFile(String fileName)
+//    {
+//        if (fileName.contains("%timestamp")) {
+//            Date d = new Date();
+//            SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSS");
+//            fileName = fileName.replaceAll("%timestamp", format.format(d));
+//        }
+//        super.setFile(fileName);
+//   } 
 }

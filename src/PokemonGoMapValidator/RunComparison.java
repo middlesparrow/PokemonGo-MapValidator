@@ -76,16 +76,14 @@ public class RunComparison {
 
                         //it is not necessary to clean the directory, but I'm doing it
                         FileUtils.cleanDirectory(f);
-                        
-
-                                
+ 
                         //validate url
                         baseUrl = links.get(i);
 
                         responseCode = openURL.openURL(driver, baseUrl);
                         if ("200".equals(responseCode)) {
 
-                            //para correrem umas animacoes no google maps dps de chegar a resposta
+                            //wait for some animations to run, like the red marker droping
                             Thread.sleep(1000);
 
                             //open the Options
@@ -99,27 +97,30 @@ public class RunComparison {
                                 //first it zooms in and then zooms out
                                 if (ZOOMINOROUT != 0) {
 
-                                    //"area" is the id of the maps red marker
-                                    //this marker seems to be always present when latitude ans longitude is used
+                                    //the red marker seems to be always present when latitude and longitude is used
                                     //when a town name is searched, sometimes the red marker is not shown
-                                    //so, the zoom is not perfect at this time
+                                    //I previously was using the red marker, now I use de + and - buttons of the map
                                     extra = driver.findElements(By.xpath("//area"));
                                     if (extra.size() > 0)
                                     {
-                                    formElement = driver.findElement(By.xpath("//area"));
-                                    formElement.click();
+                                    //formElement = driver.findElement(By.xpath("//area"));
+                                    //formElement.click();
 
                                     if (ZOOMINOROUT < 0)
                                     {
+                                        formElement = driver.findElement(By.xpath("//div[@title='Zoom out']"));
                                     for (int k = 1; k <= ZOOMINOROUT * (-1); k++) {
-                                        formElement.sendKeys(Keys.chord(Keys.SUBTRACT));
+                                        //formElement.sendKeys(Keys.chord(Keys.SUBTRACT));
+                                        formElement.click();
                                     }
                                     }
                                     
                                     if (ZOOMINOROUT > 0)
                                     {
+                                        formElement = driver.findElement(By.xpath("//div[@title='Zoom in']"));
                                      for (int k = 1; k <= ZOOMINOROUT; k++) {
-                                        formElement.sendKeys(Keys.chord(Keys.ADD));
+                                        //formElement.sendKeys(Keys.chord(Keys.ADD));
+                                        formElement.click();
                                     }   
                                     }
                                     }

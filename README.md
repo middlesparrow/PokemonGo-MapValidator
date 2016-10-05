@@ -37,9 +37,9 @@ activate the option for less secure applications.
 If the gmail account you want to use has the 2-step verification, refer to this link https://support.google.com/accounts/answer/185833 and https://support.google.com/a/answer/6260879
 
 # Installation prerequisites
- - Java 8
+ - Java 8 (if you have Java 7, try it and let me know how it went ;) )
  - Chrome Browser (the project uses chromedriver)
- - Gmail account
+ - Gmail account (if you want to send email)
 
 # How to use
  -h,--help | show help  
@@ -47,14 +47,14 @@ If the gmail account you want to use has the 2-step verification, refer to this 
  -p,--password <*****> | email password  
  -d,--email-dest <email> | email destination. Default: login email  
  -pl,--page-loading <value ms> | wait for the page to load: Default: 10000 miliseconds  
- -lp,--loading-pokemongo <value ms> | wait for pokemongo to load. Default: 10000 miliseconds
- -md,--map-dimension <"square" size> | Square dimension (more or less...). Default: full screen
- -px,--x-coord <position x> | Check graphics-info
- -py,--y-coord <position y> | Check graphics-info
- -z,--zoom <units or negative units> | zoom in or out
- -gi,--graphics-info | x-coord y-coord width height of every screen
+ -lp,--loading-pokemongo <value ms> | wait for pokemongo to load. Default: 10000 miliseconds  
+ -md,--map-dimension <"square" size> | Square dimension (more or less...). Default: full screen  
+ -px,--x-coord <position x> | Check graphics-info  
+ -py,--y-coord <position y> | Check graphics-info  
+ -z,--zoom <units or negative units> | zoom in or out  
+ -gi,--graphics-info | x-coord y-coord width height of every screen  
  
- mapvalidator.xls - place the maps in this file. Make a copy of mapvalidator-template.xls if necessary.
+ mapvalidator.xls - place the maps in this file. Start a fresh copy with mapvalidator-template.xls if necessary.
  
  chromedriver.exe - v2.24. Replace if there's a more recent version.
  
@@ -73,3 +73,11 @@ If the gmail account you want to use has the 2-step verification, refer to this 
  - Daily log instead of just one file;
  - Map dimension needs to be worked on;
  - Graphics device: select the device where to send the browser more easily than x-y coords;
+ - Validate URL: option do detect the error code of the request, Selenium does not have this;
+
+# Develop
+It's a NetBeans 8.1 project.
+
+# Download
+You can download de dist folder and run directly from the command line.
+Example to see the help: java -jar PokemonGo-MapValidator.jar -h
