@@ -30,6 +30,10 @@ http://pokemap.oinkandstuff.com:5011/
 For each map you have, it creates a folder with the prints.
 After testing all the maps, it can send an email with the results. It also can send attached pictures (disabled for now).
 
+It also logs to a log file and to an html file.
+
+# E-mail account (if you want to send emails)
+
 It is recommended to create a gmail account just for this project, and in this link
 https://www.google.com/settings/security/lesssecureapps
 activate the option for less secure applications.
@@ -37,9 +41,9 @@ activate the option for less secure applications.
 If the gmail account you want to use has the 2-step verification, refer to this link https://support.google.com/accounts/answer/185833 and https://support.google.com/a/answer/6260879
 
 # Installation prerequisites
- - Java 8 (if you have Java 7, try it and let me know how it went ;) )
- - Chrome Browser (the project uses chromedriver)
- - Gmail account (if you want to send email)
+ - Java 8 (if you have Java 7, try it and let me know how it went ;) )  
+ - Chrome Browser (the project uses Selenium chromedriver)  
+ - Gmail account (if you want to send email)  
 
 # How to use
  -h,--help | show help  
@@ -61,19 +65,18 @@ If the gmail account you want to use has the 2-step verification, refer to this 
  chromeprofile.zip - a clean profile for chrome browser. Probably at some point in time might need to be recreated. Use Selenium to do it.
 
 # Libs
- - javax.mail
- - jxl-2.6.12
- - commons-cli-1.3.1
- - zip4j_1.3.2
- - image-comparison-1.0
- - log4j-1.2.17
- - selenium-server-standalone-2.53.1
+ - javax.mail-1.5.6  
+ - jxl-2.6.12  
+ - commons-cli-1.3.1  
+ - zip4j_1.3.2  
+ - image-comparison-1.0  
+ - log4j-1.2.17 and log4j-extras-1.2.17  
+ - selenium-server-standalone-2.53.1  
 
 # ToDo
- - Daily log instead of just one file;
- - Map dimension needs to be worked on;
- - Graphics device: select the device where to send the browser more easily than x-y coords;
- - Validate URL: option do detect the error code of the request, Selenium does not have this;
+ - Map dimension needs to be worked on;  
+ - Graphics device: select the device where to send the browser more easily than x-y coords;  
+ - Validate URL: option do detect the error code of the request, Selenium does not have this;  
 
 # Develop
 It's a NetBeans 8.1 project.
