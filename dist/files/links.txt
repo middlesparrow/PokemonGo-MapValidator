@@ -1,0 +1,8 @@
+image-comparison-1.0.jar
+thumbnailator-0.4.4.jar
+http://www.frontendtest.org/blog/screenshot-comparison/
+->num comentário, remetem para http://www.java2s.com/Code/Jar/t/Downloadthumbnailator044jar.htm pois o jar original dá erro por falta desta segunda biblioteca.
+
+->mail
+https://www.mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/
+https://www.tutorialspoint.com/java/java_sending_email.htm
