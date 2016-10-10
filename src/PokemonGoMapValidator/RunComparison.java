@@ -199,7 +199,7 @@ public class RunComparison {
 
                             } else {
                                 System.out.println("Map dimension might be to small and the Options menu isn't visible, or probably there is an error with the url: " + links.get(i) + " - Location: " + links.get(i + 1));
-                                subjectList.add("Map dimension might be to small and the Options menu isn't visible, or probablyrobably there is an error with the url: " + links.get(i) + " - Location: " + links.get(i + 1));
+                                subjectList.add("Map dimension might be to small and the Options menu isn't visible, or probably there is an error with the url: " + links.get(i) + " - Location: " + links.get(i + 1));
                                 countTot++;
                             }
 

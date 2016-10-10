@@ -82,5 +82,5 @@ If the gmail account you want to use has the 2-step verification, refer to this 
 It's a NetBeans 8.1 project.
 
 # Download
-You can download de dist folder and run directly from the command line.  
+You can download the dist folder and run directly from the command line.  
 Example to see the help: java -jar PokemonGo-MapValidator.jar -h
